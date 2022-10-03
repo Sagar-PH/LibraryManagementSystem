@@ -1,0 +1,169 @@
+{% extends 'index.html' %}
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+{% block content %}
+    <h2>Library</h2>
+    {% if user.is_authenticated %}
+        {% if book|length > 0 %}
+            <table>
+                <tr>
+                    <th id="cont">Book</th>
+                    <th id="crea">Author</th>
+                    <th id="cont">Publisher</th>
+                    <th id="crea">Publised Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                {% for bk in book %}
+                    <tr>
+                        <td id="cont">{{ bk.title }}</td>
+                        <td id="cont">{{ bk.author }}</td>
+                        <td id="cont">{{ bk.publisher }}</td>
+                        <td id="cont">{{ bk.published.date }}</td>
+                        <td><a href="{% url 'edit' bk.id %}"  id="but">Edit</a></td>
+                        <td><a href="{% url 'delete' bk.id %}" style="margin-left: 3px;"  id="but">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table><br>
+        {% else %}
+            <h4>There are no Book.</h4>
+        {% endif %}
+    {% else %}
+        {% if book|length > 0 %}
+            <table>
+                <tr>
+                    <th id="cont">Book</th>
+                    <th id="crea">Author</th>
+                    <th id="cont">Publisher</th>
+                    <th id="crea">Published Date</th>
+                </tr>
+                {% for bk in book %}
+                    <tr>
+                        <td id="cont">{{ bk.title }}</td>
+                        <td id="cont">{{ bk.author }}</td>
+                        <td id="cont">{{ bk.publisher }}</td>
+                        <td id="cont">{{ bk.published.date }}</td>
+                    </tr>
+                {% endfor %}
+            </table><br>
+        {% else %}
+            <h4>There are no Book.</h4>
+        {% endif %}
+    {% endif %}
+    <style>
+        #cont {
+            width: 150px;
+            text-align: center;
+        }
+        th, td {
+            background-color: #d5d1f5;
+            padding: 10px;
+            width: 50px;
+        }
+        table {
+            border: 1px solid black;
+        }
+        #cpass {
+            float: right;
+        }
+        #but {
+            text-decoration: none;
+            padding: 5px 10px 5px 10px;
+            border-radius: 3px;
+            background-color: brown;
+            color: azure;
+            margin: 5px 15px 5px 15px;
+        }
+        #but:hover {
+            background-color: rgb(170, 67, 67)
+        }
+        label {
+            display: inline-table;
+            width: 120px;
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+        input[type=submit] {
+            width: 75px;
+            height: 30px;
+            border: 0;
+            border-radius: 3px;
+            background-color: rgb(69, 69, 121);
+            color: white;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        input[type=submit]:hover {
+            background-color: rgb(88, 88, 150);
+        }
+
+        body {
+            display: grid;
+            justify-content: center;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        input[type=text] {
+            outline: none;
+            width: 200px;
+            height: 23px;
+            border-radius: 3px;
+            border: 1px solid black;
+            font-size: 1.05rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        h4 {
+            text-align: center;
+        }
+        @media screen and (max-width: 500px) {
+            body {
+                font-size: 0.92rem;
+            }
+            table, form {
+                width: 100%;
+                margin-right: 5px; 
+            }
+            th, td {
+                padding: 5px 4px 5px 4px;
+                margin: 0;
+            }
+            #but {
+                padding: 4px 5px 4px 5px;
+                margin: 0 5px 0 5px;
+                border-radius: 2px;
+            }
+        }
+        @media screen and (max-width: 325px) {
+            body, label {
+                font-size: 0.8rem;
+            }
+            table, form {
+                width: 100%;
+                margin-top: 0px;
+            }
+            th, td {
+                padding: 3px 2px 3px 2px;
+                margin: 0;
+            }
+            #but {
+                padding: 3px 3px 3px 3px;
+                margin: 0 5px 0 5px;
+                border-radius: 2px;
+            }
+            input[type=submit] {
+                font-size: 0.8rem;
+                width: 50px;
+                height: 28px;
+            }
+            input[type=text] {
+                width: 150px;
+            }
+            label {
+                width: 80px;
+            }
+        }
+    </style>
+{% endblock %}

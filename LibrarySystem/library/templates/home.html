@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div id="addb"><a href="{% url 'addbook' %}">Add Book</a></div>
+        <div id="getb"><a href="{% url 'getbook' %}">Get all the books</a></div>
+        <div id="log1"><a href="{% url 'logout' %}">Logout</a></div>
+    {% else %}
+        <div id="getb"><a href="{% url 'getbook' %}">Student View</a></div>
+        <div id="log2"></div><a href="{% url 'login' %}">Admin Login</a></div>
+    {% endif %}
+    <style>
+        body {
+            display: grid;
+            justify-content: center;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #addb, #getb, #log1, #log2 {
+            font-size: 1.2rem;
+            border-radius: 2px;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+{% endblock %}
